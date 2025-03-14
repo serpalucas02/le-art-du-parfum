@@ -13,11 +13,11 @@ interface ProductCardProps {
   brand: string
   price: number
   effectivePrice?: number
-  installments?: number
-  installmentPrice?: number
+  // installments?: number
+  // installmentPrice?: number
   discount?: number
   imageUrl: string
-  location?: string
+  // location?: string
 }
 
 export default function ProductCard({
@@ -26,11 +26,11 @@ export default function ProductCard({
   brand,
   price,
   effectivePrice,
-  installments,
-  installmentPrice,
+  // installments,
+  // installmentPrice,
   discount,
   imageUrl,
-  location = "showroom",
+  // location = "showroom",
 }: ProductCardProps) {
   const { addItem } = useCart()
 
@@ -74,19 +74,19 @@ export default function ProductCard({
 
       <div className="p-4">
         <Link href={`/producto/${id}`} className="block">
-          <h3 className="font-medium text-center mb-4 h-12 line-clamp-2">{name}</h3>
+          <h3 className="font-medium text-center mb-4 h-12 line-clamp-2 text-black">{name}</h3>
 
           <div className="text-center mb-2">
-            <p className="text-xl font-bold">${price.toLocaleString()}</p>
-            <p className="text-sm text-gray-700">${calculatedEffectivePrice.toLocaleString()} con Efectivo</p>
-            {location && <p className="text-xs text-gray-500">(Disponible en {location})</p>}
+            <p className="text-xl font-bold text-black">${price.toLocaleString()}</p>
+            <p className="text-sm text-gray-700">${calculatedEffectivePrice.toLocaleString()} en Efectivo</p>
+            {/* {location && <p className="text-xs text-gray-500">(Disponible en {location})</p>} */}
           </div>
 
-          {installments && installmentPrice && (
+          {/* {installments && installmentPrice && (
             <p className="text-xs text-center text-gray-500 mb-4">
               {installments} cuotas sin interés de ${installmentPrice.toLocaleString()}
             </p>
-          )}
+          )} */}
         </Link>
 
         <Button className="w-full bg-black hover:bg-gray-800 text-white" onClick={handleAddToCart}>

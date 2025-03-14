@@ -4,9 +4,9 @@ import { verifyToken } from "@/lib/services/auth-service"
 
 // GET /api/products/[id] - Obtener un producto por ID
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = await Promise.resolve(params)
   try {
-    const product = await getProductById(params.id)
-
+    const product = await getProductById(id)
     if (!product) {
       return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 })
     }
@@ -20,6 +20,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
 // PUT /api/products/[id] - Actualizar un producto (requiere autenticación)
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = await Promise.resolve(params)
   try {
     // Verificar autenticación
     const authHeader = request.headers.get("authorization")
@@ -36,8 +37,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     // Procesar la solicitud
     const productData = await request.json()
-    const updatedProduct = await updateProduct(params.id, productData)
-
+    const updatedProduct = await updateProduct(id, productData)
     if (!updatedProduct) {
       return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 })
     }
@@ -51,6 +51,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
 // DELETE /api/products/[id] - Eliminar un producto (requiere autenticación)
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = await Promise.resolve(params)
   try {
     // Verificar autenticación
     const authHeader = request.headers.get("authorization")
@@ -66,8 +67,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     }
 
     // Procesar la solicitud
-    const success = await deleteProduct(params.id)
-
+    const success = await deleteProduct(id)
     if (!success) {
       return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 })
     }
@@ -78,4 +78,3 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     return NextResponse.json({ error: "Error al eliminar producto" }, { status: 500 })
   }
 }
-

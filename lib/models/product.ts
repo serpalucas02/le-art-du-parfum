@@ -8,11 +8,11 @@ export interface Product {
   effectivePrice?: number
   category: string
   imageUrl: string
-  installments?: number
-  installmentPrice?: number
+  // installments?: number
+  // installmentPrice?: number
   discount?: number
   available?: boolean
-  location?: string
+  // location?: string
   createdAt?: Date
   updatedAt?: Date
 }

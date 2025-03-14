@@ -49,7 +49,7 @@ export default function CartPage() {
     // Productos
     message += `*Productos:*${lineBreak}`
     items.forEach((item) => {
-      message += `- ${item.name} (${item.quantity}) - $${(item.effectivePrice * item.quantity).toLocaleString()}${lineBreak}`
+      message += `- ${item.name} (${item.quantity}) - $${(item.price * item.quantity).toLocaleString()}${lineBreak}`
     })
 
     message += `${lineBreak}*Subtotal:* $${subtotal.toLocaleString()}${lineBreak}`
@@ -67,7 +67,7 @@ export default function CartPage() {
 
   const handleWhatsAppCheckout = () => {
     // Número de WhatsApp del vendedor (reemplazar con el número real)
-    const phoneNumber = "5491112345678"
+    const phoneNumber = "5491168552829"
     const message = formatWhatsAppMessage()
 
     // Crear URL de WhatsApp con el mensaje
@@ -119,7 +119,7 @@ export default function CartPage() {
         {/* Productos en el carrito */}
         <div className="flex-1">
           <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-            <div className="hidden md:grid grid-cols-12 gap-4 pb-4 border-b">
+            <div className="hidden md:grid grid-cols-12 gap-4 pb-4 border-b text-black">
               <div className="col-span-6">
                 <h3 className="font-semibold">Producto</h3>
               </div>
@@ -135,7 +135,7 @@ export default function CartPage() {
             </div>
 
             {items.map((item) => (
-              <div key={item.id} className="py-4 border-b last:border-b-0">
+              <div key={item.id} className="py-4 border-b last:border-b-0 text-black">
                 <div className="md:grid md:grid-cols-12 md:gap-4 md:items-center">
                   {/* Producto (móvil y desktop) */}
                   <div className="flex items-center col-span-6 mb-4 md:mb-0">
@@ -154,14 +154,14 @@ export default function CartPage() {
 
                       {/* Precio (solo móvil) */}
                       <div className="flex justify-between items-center mt-2 md:hidden">
-                        <p className="text-sm">${item.effectivePrice.toLocaleString()}</p>
+                        <p className="text-sm">${item.price.toLocaleString()}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Precio (desktop) */}
                   <div className="hidden md:block col-span-2 text-center">
-                    <p>${item.effectivePrice.toLocaleString()}</p>
+                    <p>${item.price.toLocaleString()}</p>
                   </div>
 
                   {/* Cantidad (móvil y desktop) */}
@@ -190,7 +190,7 @@ export default function CartPage() {
 
                   {/* Total (desktop) */}
                   <div className="hidden md:flex md:items-center md:justify-between col-span-2">
-                    <p className="text-center w-full">${(item.effectivePrice * item.quantity).toLocaleString()}</p>
+                    <p className="text-center w-full">${(item.price * item.quantity).toLocaleString()}</p>
 
                     {/* Eliminar (desktop) */}
                     <button onClick={() => removeItem(item.id)} className="text-red-500 ml-4">
@@ -217,7 +217,7 @@ export default function CartPage() {
 
         {/* Resumen y checkout */}
         <div className="lg:w-1/3">
-          <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+          <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24 text-black">
             <h2 className="text-xl font-bold mb-6 text-black">Resumen del pedido</h2>
 
             <div className="space-y-4 mb-6">
@@ -242,7 +242,7 @@ export default function CartPage() {
                 <label htmlFor="name" className="block text-sm mb-1">
                   Nombre completo *
                 </label>
-                <Input id="name" name="name" value={customerInfo.name} onChange={handleInputChange} required />
+                <Input id="name" name="name" className="text-white" value={customerInfo.name} onChange={handleInputChange} required />
               </div>
 
               <div>
@@ -253,6 +253,7 @@ export default function CartPage() {
                   id="email"
                   name="email"
                   type="email"
+                  className="text-white"
                   value={customerInfo.email}
                   onChange={handleInputChange}
                   required
@@ -263,21 +264,21 @@ export default function CartPage() {
                 <label htmlFor="phone" className="block text-sm mb-1">
                   Teléfono *
                 </label>
-                <Input id="phone" name="phone" value={customerInfo.phone} onChange={handleInputChange} required />
+                <Input id="phone" name="phone" type="number" className="text-white" value={customerInfo.phone} onChange={handleInputChange} required />
               </div>
 
               <div>
                 <label htmlFor="address" className="block text-sm mb-1">
                   Dirección de envío *
                 </label>
-                <Input id="address" name="address" value={customerInfo.address} onChange={handleInputChange} required />
+                <Input id="address" name="address" className="text-white" value={customerInfo.address} onChange={handleInputChange} required />
               </div>
 
               <div>
                 <label htmlFor="notes" className="block text-sm mb-1">
                   Notas adicionales
                 </label>
-                <Textarea id="notes" name="notes" value={customerInfo.notes} onChange={handleInputChange} rows={3} />
+                <Textarea id="notes" name="notes" className="text-white" value={customerInfo.notes} onChange={handleInputChange} rows={3} />
               </div>
             </div>
 

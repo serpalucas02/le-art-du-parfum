@@ -25,11 +25,11 @@ export default function NewProductPage() {
     description: "",
     price: "",
     discount: "",
-    installments: "6", // Por defecto 6 cuotas
+    // installments: "6", // Por defecto 6 cuotas
     category: "",
     imageUrl: "/placeholder.svg?height=300&width=300", // URL de imagen por defecto
     available: true,
-    location: "showroom",
+    // location: "showroom",
   })
 
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -126,7 +126,7 @@ export default function NewProductPage() {
         ...formData,
         price: Number(formData.price),
         discount: formData.discount ? Number(formData.discount) : undefined,
-        installments: Number(formData.installments),
+        // installments: Number(formData.installments),
       }
 
       // Enviar datos a la API
@@ -251,7 +251,7 @@ export default function NewProductPage() {
                 </p>
               </div>
 
-              <div>
+              {/* <div>
                 <label htmlFor="installments" className="block text-sm font-medium mb-1 text-gray-900">
                   Cuotas
                 </label>
@@ -268,7 +268,7 @@ export default function NewProductPage() {
                     <SelectItem value="12">12 cuotas</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
 
               <div>
                 <label htmlFor="category" className="block text-sm font-medium mb-1 text-gray-900">
@@ -287,12 +287,12 @@ export default function NewProductPage() {
                 {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category}</p>}
               </div>
 
-              <div>
+              {/* <div>
                 <label htmlFor="location" className="block text-sm font-medium mb-1 text-gray-900">
                   Ubicación
                 </label>
                 <Input id="location" name="location" value={formData.location} onChange={handleChange} />
-              </div>
+              </div> */}
 
               <div className="md:col-span-2">
                 <label htmlFor="description" className="block text-sm font-medium mb-1 text-gray-900">

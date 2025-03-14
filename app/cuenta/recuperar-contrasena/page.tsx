@@ -47,19 +47,35 @@ export default function RecoverPasswordPage() {
     setIsLoading(true)
 
     try {
-      // Simulación de envío de correo de recuperación
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      // Llamada real a la API de recuperación
+      const response = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al enviar el correo de recuperación")
+      }
 
       setIsSubmitted(true)
 
       toast({
         title: "Correo enviado",
-        description: "Hemos enviado un correo con instrucciones para recuperar tu contraseña",
+        description:
+          "Hemos enviado un correo con instrucciones para recuperar tu contraseña",
       })
     } catch (error) {
       toast({
         title: "Error",
-        description: "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
         variant: "destructive",
       })
     } finally {
@@ -70,27 +86,34 @@ export default function RecoverPasswordPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-sm p-8">
-        <h1 className="text-2xl font-bold text-center mb-6">Recuperar contraseña</h1>
+        <h1 className="text-2xl font-bold text-center mb-6 text-black">
+          Recuperar contraseña
+        </h1>
 
         {isSubmitted ? (
-          <div className="text-center">
+          <div className="text-center text-gray-600">
             <p className="mb-4">
-              Hemos enviado un correo a <strong>{email}</strong> con instrucciones para recuperar tu contraseña.
+              Hemos enviado un correo a <strong>{email}</strong> con instrucciones
+              para recuperar tu contraseña.
             </p>
             <p className="mb-6 text-sm text-gray-600">
-              Si no recibes el correo en unos minutos, revisa tu carpeta de spam o inténtalo de nuevo.
+              Si no recibes el correo en unos minutos, revisa tu carpeta de spam o
+              inténtalo de nuevo.
             </p>
             <Link href="/cuenta/iniciar-sesion">
-              <Button className="bg-black hover:bg-gray-800 text-white">Volver a inicio de sesión</Button>
+              <Button className="bg-black hover:bg-gray-800 text-white">
+                Volver a inicio de sesión
+              </Button>
             </Link>
           </div>
         ) : (
           <>
-            <p className="text-gray-600 mb-6">
-              Ingresa tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
+            <p className="text-center text-gray-600 mb-6">
+              Ingresa tu dirección de correo electrónico y te enviaremos un enlace para
+              restablecer tu contraseña.
             </p>
 
-            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-center text-sm text-gray-500 mb-4">
               Los campos marcados con <span className="text-red-500">*</span> son obligatorios
             </p>
 
@@ -126,4 +149,3 @@ export default function RecoverPasswordPage() {
     </div>
   )
 }
-

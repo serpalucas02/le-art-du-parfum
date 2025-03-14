@@ -21,7 +21,7 @@ export default function RegisterPage() {
     email: "",
     password: "",
     confirmPassword: "",
-    acceptTerms: false,
+    // acceptTerms: false,
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
@@ -70,9 +70,9 @@ export default function RegisterPage() {
       newErrors.confirmPassword = "Las contraseñas no coinciden"
     }
 
-    if (!formData.acceptTerms) {
-      newErrors.acceptTerms = "Debes aceptar los términos y condiciones"
-    }
+    // if (!formData.acceptTerms) {
+    //   newErrors.acceptTerms = "Debes aceptar los términos y condiciones"
+    // }
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -88,8 +88,20 @@ export default function RegisterPage() {
     setIsLoading(true)
 
     try {
-      // Simulación de registro
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      // Enviar datos a la API real para registrar el usuario
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al registrarse")
+      }
 
       toast({
         title: "Registro exitoso",
@@ -100,7 +112,10 @@ export default function RegisterPage() {
     } catch (error) {
       toast({
         title: "Error al registrarse",
-        description: "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
         variant: "destructive",
       })
     } finally {
@@ -130,6 +145,16 @@ export default function RegisterPage() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <p>Cargando...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -241,7 +266,7 @@ export default function RegisterPage() {
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
           </div>
 
-          <div className="mb-6">
+          <div className="mb-12">
             <label htmlFor="confirmPassword" className="block text-sm font-medium mb-1 text-gray-900">
               Confirmar contraseña <span className="text-red-500">*</span>
             </label>
@@ -265,7 +290,7 @@ export default function RegisterPage() {
             {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
           </div>
 
-          <div className="flex items-start mb-6">
+          {/* <div className="flex items-start mb-6">
             <div className="flex items-center h-5">
               <Checkbox
                 id="acceptTerms"
@@ -283,7 +308,7 @@ export default function RegisterPage() {
               </label>
               {errors.acceptTerms && <p className="text-red-500 text-xs mt-1">{errors.acceptTerms}</p>}
             </div>
-          </div>
+          </div> */}
 
           <Button type="submit" className="w-full bg-black hover:bg-gray-800 text-white" disabled={isLoading}>
             {isLoading ? "Creando cuenta..." : "Crear cuenta"}
@@ -300,4 +325,3 @@ export default function RegisterPage() {
     </div>
   )
 }
-

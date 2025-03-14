@@ -116,11 +116,11 @@ export default async function WomensFragrancesPage() {
                   brand={product.brand}
                   price={product.price}
                   effectivePrice={product.effectivePrice}
-                  installments={product.installments}
-                  installmentPrice={product.installmentPrice}
+                  // installments={product.installments}
+                  // installmentPrice={product.installmentPrice}
                   discount={product.discount}
                   imageUrl={product.imageUrl}
-                  location={product.location}
+                  // location={product.location}
                 />
               ))
             ) : (

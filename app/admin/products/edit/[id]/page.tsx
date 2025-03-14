@@ -29,11 +29,11 @@ export default function EditProductPage() {
     description: "",
     price: "",
     discount: "",
-    installments: "6",
+    // installments: "6",
     category: "",
     imageUrl: "",
     available: true,
-    location: "showroom",
+    // location: "showroom",
   })
 
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -74,11 +74,11 @@ export default function EditProductPage() {
         description: product.description || "",
         price: product.price.toString(),
         discount: product.discount ? product.discount.toString() : "",
-        installments: product.installments ? product.installments.toString() : "6",
+        // installments: product.installments ? product.installments.toString() : "6",
         category: product.category,
         imageUrl: product.imageUrl,
         available: product.available !== false,
-        location: product.location || "showroom",
+        // location: product.location || "showroom",
       })
     } catch (error) {
       toast({
@@ -165,7 +165,7 @@ export default function EditProductPage() {
         ...formData,
         price: Number(formData.price),
         discount: formData.discount ? Number(formData.discount) : undefined,
-        installments: Number(formData.installments),
+        // installments: Number(formData.installments),
       }
 
       // Enviar datos a la API
@@ -290,7 +290,7 @@ export default function EditProductPage() {
                 </p>
               </div>
 
-              <div>
+              {/* <div>
                 <label htmlFor="installments" className="block text-sm font-medium mb-1 text-gray-900">
                   Cuotas
                 </label>
@@ -307,7 +307,7 @@ export default function EditProductPage() {
                     <SelectItem value="12">12 cuotas</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
 
               <div>
                 <label htmlFor="category" className="block text-sm font-medium mb-1 text-gray-900">
@@ -326,12 +326,12 @@ export default function EditProductPage() {
                 {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category}</p>}
               </div>
 
-              <div>
+              {/* <div>
                 <label htmlFor="location" className="block text-sm font-medium mb-1 text-gray-900">
                   Ubicación
                 </label>
                 <Input id="location" name="location" value={formData.location} onChange={handleChange} />
-              </div>
+              </div> */}
 
               <div className="md:col-span-2">
                 <label htmlFor="description" className="block text-sm font-medium mb-1 text-gray-900">

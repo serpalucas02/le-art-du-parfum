@@ -61,9 +61,9 @@ export async function createProduct(productData: Omit<Product, "_id">): Promise<
     productData.effectivePrice = calculateEffectivePrice(productData.price, productData.discount)
   }
 
-  if (productData.installments && !productData.installmentPrice) {
-    productData.installmentPrice = calculateInstallmentPrice(productData.price, productData.installments)
-  }
+  // if (productData.installments && !productData.installmentPrice) {
+  //   productData.installmentPrice = calculateInstallmentPrice(productData.price, productData.installments)
+  // }
 
   const now = new Date()
   const productWithTimestamps = {
@@ -93,12 +93,12 @@ export async function updateProduct(id: string, productData: Partial<Product>): 
       productData.discount || existingProduct?.discount
     )
 
-    if (productData.installments || existingProduct?.installments) {
-      productData.installmentPrice = calculateInstallmentPrice(
-        productData.price,
-        productData.installments || existingProduct?.installments || 6
-      )
-    }
+    // if (productData.installments || existingProduct?.installments) {
+    //   productData.installmentPrice = calculateInstallmentPrice(
+    //     productData.price,
+    //     productData.installments || existingProduct?.installments || 6
+    //   )
+    // }
   }
 
   productData.updatedAt = new Date()
