@@ -115,10 +115,10 @@ export default async function DecantsPage() {
                   name={product.name}
                   brand={product.brand}
                   price={product.price}
-                  effectivePrice={product.effectivePrice}
+                  // effectivePrice={product.effectivePrice}
                   // installments={product.installments}
                   // installmentPrice={product.installmentPrice}
-                  discount={product.discount}
+                  // discount={product.discount}
                   imageUrl={product.imageUrl}
                   // location={product.location}
                 />

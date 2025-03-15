@@ -7,7 +7,7 @@ export type CartItem = {
   name: string
   brand: string
   price: number
-  effectivePrice: number // Mantenemos esto como requerido ya que lo calculamos en addItem si no existe
+  // effectivePrice: number // Mantenemos esto como requerido ya que lo calculamos en addItem si no existe
   imageUrl: string
   quantity: number
 }
@@ -20,7 +20,7 @@ type CartContextType = {
   clearCart: () => void
   itemCount: number
   subtotal: number
-  effectiveSubtotal: number
+  // effectiveSubtotal: number
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
@@ -52,7 +52,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       // Asegurarse de que effectivePrice tenga un valor
       const itemWithEffectivePrice = {
         ...newItem,
-        effectivePrice: newItem.effectivePrice ?? Math.round(newItem.price * 0.7), // 30% de descuento por defecto
+        // effectivePrice: newItem.effectivePrice ?? Math.round(newItem.price * 0.7), // 30% de descuento por defecto
       }
 
       if (existingItemIndex >= 0) {
@@ -91,7 +91,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0)
 
-  const effectiveSubtotal = items.reduce((total, item) => total + item.effectivePrice * item.quantity, 0)
+  // const effectiveSubtotal = items.reduce((total, item) => total + item.effectivePrice * item.quantity, 0)
 
   return (
     <CartContext.Provider
@@ -103,7 +103,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         clearCart,
         itemCount,
         subtotal,
-        effectiveSubtotal,
+        // effectiveSubtotal,
       }}
     >
       {children}

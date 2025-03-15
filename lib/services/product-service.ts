@@ -57,9 +57,9 @@ export async function createProduct(productData: Omit<Product, "_id">): Promise<
   const client = await clientPromise
   const db = client.db(DB_NAME)
 
-  if (!productData.effectivePrice) {
-    productData.effectivePrice = calculateEffectivePrice(productData.price, productData.discount)
-  }
+  // if (!productData.effectivePrice) {
+  //   productData.effectivePrice = calculateEffectivePrice(productData.price, productData.discount)
+  // }
 
   // if (productData.installments && !productData.installmentPrice) {
   //   productData.installmentPrice = calculateInstallmentPrice(productData.price, productData.installments)
@@ -88,10 +88,10 @@ export async function updateProduct(id: string, productData: Partial<Product>): 
   const existingProduct = await getProductById(id)
 
   if (productData.price) {
-    productData.effectivePrice = calculateEffectivePrice(
-      productData.price,
-      productData.discount || existingProduct?.discount
-    )
+    // productData.effectivePrice = calculateEffectivePrice(
+    //   productData.price,
+    //   productData.discount || existingProduct?.discount
+    // )
 
     // if (productData.installments || existingProduct?.installments) {
     //   productData.installmentPrice = calculateInstallmentPrice(

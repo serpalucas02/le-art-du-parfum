@@ -107,7 +107,7 @@ export default function AdminLoginPage() {
       }
 
       // Iniciar sesión
-      const loginResponse = await fetch("/api/auth/login", {
+      const loginResponse = await fetch("/api/auth/admin-login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

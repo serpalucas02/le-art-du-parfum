@@ -28,7 +28,7 @@ export default function EditProductPage() {
     brand: "",
     description: "",
     price: "",
-    discount: "",
+    // discount: "",
     // installments: "6",
     category: "",
     imageUrl: "",
@@ -73,7 +73,7 @@ export default function EditProductPage() {
         brand: product.brand,
         description: product.description || "",
         price: product.price.toString(),
-        discount: product.discount ? product.discount.toString() : "",
+        // discount: product.discount ? product.discount.toString() : "",
         // installments: product.installments ? product.installments.toString() : "6",
         category: product.category,
         imageUrl: product.imageUrl,
@@ -164,7 +164,7 @@ export default function EditProductPage() {
       const productData = {
         ...formData,
         price: Number(formData.price),
-        discount: formData.discount ? Number(formData.discount) : undefined,
+        // discount: formData.discount ? Number(formData.discount) : undefined,
         // installments: Number(formData.installments),
       }
 
@@ -272,7 +272,7 @@ export default function EditProductPage() {
                 {errors.price && <p className="text-red-500 text-xs mt-1">{errors.price}</p>}
               </div>
 
-              <div>
+              {/* <div>
                 <label htmlFor="discount" className="block text-sm font-medium mb-1 text-gray-900">
                   Descuento (%)
                 </label>
@@ -288,7 +288,7 @@ export default function EditProductPage() {
                 <p className="text-xs text-gray-500 mt-1">
                   Opcional. Si no se especifica, se aplicará 30% por defecto para efectivo.
                 </p>
-              </div>
+              </div> */}
 
               {/* <div>
                 <label htmlFor="installments" className="block text-sm font-medium mb-1 text-gray-900">

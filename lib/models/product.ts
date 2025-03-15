@@ -5,12 +5,12 @@ export interface Product {
   brand: string
   description?: string
   price: number
-  effectivePrice?: number
+  // effectivePrice?: number
   category: string
   imageUrl: string
   // installments?: number
   // installmentPrice?: number
-  discount?: number
+  // discount?: number
   available?: boolean
   // location?: string
   createdAt?: Date

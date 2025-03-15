@@ -20,7 +20,8 @@ import {
 import { ChevronRight } from "lucide-react"
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, subtotal, effectiveSubtotal, clearCart } = useCart()
+  // const { items, removeItem, updateQuantity, subtotal, effectiveSubtotal, clearCart } = useCart()
+  const { items, removeItem, updateQuantity, subtotal, clearCart } = useCart()
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
     email: "",
@@ -52,8 +53,8 @@ export default function CartPage() {
       message += `- ${item.name} (${item.quantity}) - $${(item.price * item.quantity).toLocaleString()}${lineBreak}`
     })
 
-    message += `${lineBreak}*Subtotal:* $${subtotal.toLocaleString()}${lineBreak}`
-    message += `*Total con descuento efectivo:* $${effectiveSubtotal.toLocaleString()}${lineBreak}${lineBreak}`
+    message += `${lineBreak}*Total:* $${subtotal.toLocaleString()}${lineBreak}`
+    // message += `*Total con descuento efectivo:* $${effectiveSubtotal.toLocaleString()}${lineBreak}${lineBreak}`
 
     // Notas adicionales
     if (customerInfo.notes) {
@@ -221,17 +222,17 @@ export default function CartPage() {
             <h2 className="text-xl font-bold mb-6 text-black">Resumen del pedido</h2>
 
             <div className="space-y-4 mb-6">
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <span>Subtotal</span>
                 <span>${subtotal.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-green-600">
+              </div> */}
+              {/* <div className="flex justify-between text-green-600">
                 <span>Descuento efectivo</span>
                 <span>-${(subtotal - effectiveSubtotal).toLocaleString()}</span>
-              </div>
+              </div> */}
               <div className="flex justify-between font-bold text-lg pt-4 border-t">
                 <span>Total</span>
-                <span>${effectiveSubtotal.toLocaleString()}</span>
+                <span>${subtotal.toLocaleString()}</span>
               </div>
             </div>
 

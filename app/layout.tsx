@@ -12,7 +12,7 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Fragancias Premium | Tu Tienda de Perfumes",
+  title: "LE ART DU PARFUM | Tu Tienda de Perfumes",
   description: "Descubre nuestra colección exclusiva de fragancias y perfumes de alta calidad",
     generator: 'v0.dev'
 }

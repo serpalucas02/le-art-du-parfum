@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState, FormEvent } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Search, User, ShoppingCart, Menu } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -14,18 +15,32 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { toast } from "@/hooks/use-toast"
 
 export default function Navbar() {
+  const router = useRouter()
   const { itemCount } = useCart()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  // Simulación de estado de autenticación - en una aplicación real esto vendría de un contexto de autenticación
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+
+  useEffect(() => {
+    // Verifica si existe un token en localStorage para determinar el estado de autenticación
+    const token = localStorage.getItem("userToken")
+    setIsAuthenticated(!!token)
+  }, [])
+
+  // Manejador del submit para la búsqueda
+  const handleSearchSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    if (!searchQuery.trim()) return
+    router.push(`/search?query=${encodeURIComponent(searchQuery)}`)
+  }
 
   return (
     <>
       <div className="w-full bg-black text-white text-center py-2 text-xs md:text-sm overflow-hidden">
         <div className="animate-marquee whitespace-nowrap">
-          6 CUOTAS SIN INTERÉS | 25% OFF TRANSFERENCIA | 30% OFF EFECTIVO | ENVÍO GRÁTIS SUPERANDO $250.000
+          AFNAN | ANFAR | ARMAF | ASDAAF | BHARARA | LATTAFA | MAISON | MAWWAL | PARIS CORNER | RASASI
         </div>
       </div>
       <header className="bg-black border-b border-gray-800 sticky top-0 z-40">
@@ -59,21 +74,24 @@ export default function Navbar() {
               </Sheet>
 
               <Link href="/" className="flex items-center">
-                <span className="text-xl md:text-2xl font-bold text-white">FRAGANCIAS</span>
+                <span className="text-xl md:text-2xl font-bold text-white">LE ART DU PARFUM</span>
               </Link>
             </div>
 
+            {/* Barra de búsqueda */}
             <div className="hidden md:flex flex-1 max-w-xl mx-4">
-              <div className="relative w-full">
+              <form onSubmit={handleSearchSubmit} className="relative w-full">
                 <Input
                   type="search"
                   placeholder="¿Qué estás buscando?"
                   className="w-full bg-gray-900 border-gray-700 pl-4 pr-10 py-2 rounded-md"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <Button variant="ghost" className="absolute right-0 top-0 h-full aspect-square p-2">
+                <Button type="submit" variant="ghost" className="absolute right-0 top-0 h-full aspect-square p-2">
                   <Search className="h-5 w-5 text-gray-400" />
                 </Button>
-              </div>
+              </form>
             </div>
 
             <div className="flex items-center space-x-2 md:space-x-6">
@@ -82,7 +100,7 @@ export default function Navbar() {
               </button>
 
               {/* Menú de usuario */}
-              <div className="flex flex-col items-center text-sm text-gray-300 hover:text-white">
+              {/* <div className="flex flex-col items-center text-sm text-gray-300 hover:text-white">
                 {isAuthenticated ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger className="flex flex-col items-center">
@@ -111,7 +129,7 @@ export default function Navbar() {
                     <span className="hidden md:inline">Iniciar sesión</span>
                   </Link>
                 )}
-              </div>
+              </div> */}
 
               <Link
                 href="/carrito"
@@ -153,4 +171,3 @@ export default function Navbar() {
     </>
   )
 }
-

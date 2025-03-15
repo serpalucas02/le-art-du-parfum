@@ -165,7 +165,7 @@ export default function RegisterPage() {
           Los campos marcados con <span className="text-red-500">*</span> son obligatorios
         </p>
 
-        <button
+        {/* <button
           onClick={handleGoogleSignIn}
           disabled={isLoading}
           className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-md py-3 px-4 mb-6 hover:bg-gray-50 transition-colors font-medium"
@@ -194,7 +194,7 @@ export default function RegisterPage() {
         <div className="relative flex items-center justify-center mb-6">
           <div className="border-t border-gray-300 absolute w-full"></div>
           <span className="bg-white px-2 text-sm text-gray-500 relative">O</span>
-        </div>
+        </div> */}
 
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

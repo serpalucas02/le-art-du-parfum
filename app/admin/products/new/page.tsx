@@ -24,7 +24,7 @@ export default function NewProductPage() {
     brand: "",
     description: "",
     price: "",
-    discount: "",
+    // discount: "",
     // installments: "6", // Por defecto 6 cuotas
     category: "",
     imageUrl: "/placeholder.svg?height=300&width=300", // URL de imagen por defecto
@@ -125,7 +125,7 @@ export default function NewProductPage() {
       const productData = {
         ...formData,
         price: Number(formData.price),
-        discount: formData.discount ? Number(formData.discount) : undefined,
+        // discount: formData.discount ? Number(formData.discount) : undefined,
         // installments: Number(formData.installments),
       }
 
@@ -233,7 +233,7 @@ export default function NewProductPage() {
                 {errors.price && <p className="text-red-500 text-xs mt-1">{errors.price}</p>}
               </div>
 
-              <div>
+              {/* <div>
                 <label htmlFor="discount" className="block text-sm font-medium mb-1 text-gray-900">
                   Descuento (%)
                 </label>
@@ -249,7 +249,7 @@ export default function NewProductPage() {
                 <p className="text-xs text-gray-500 mt-1">
                   Opcional. Si no se especifica, se aplicará 30% por defecto para efectivo.
                 </p>
-              </div>
+              </div> */}
 
               {/* <div>
                 <label htmlFor="installments" className="block text-sm font-medium mb-1 text-gray-900">

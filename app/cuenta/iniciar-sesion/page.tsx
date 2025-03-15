@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -29,7 +27,7 @@ export default function LoginPage() {
       [name]: type === "checkbox" ? checked : value,
     }))
 
-    // Limpiar error cuando el usuario comienza a escribir
+    // Borrar error del campo al escribir
     if (errors[name]) {
       setErrors((prev) => {
         const newErrors = { ...prev }
@@ -66,8 +64,21 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      // Simulación de inicio de sesión
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      // Se hace la petición al endpoint de inicio de sesión para usuarios
+      const response = await fetch("/api/auth/user-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al iniciar sesión")
+      }
+
+      // Guardar el token en localStorage (y, si lo deseas, otros datos del usuario)
+      localStorage.setItem("userToken", data.token)
 
       toast({
         title: "Inicio de sesión exitoso",
@@ -78,7 +89,10 @@ export default function LoginPage() {
     } catch (error) {
       toast({
         title: "Error al iniciar sesión",
-        description: "Email o contraseña incorrectos",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Email o contraseña incorrectos",
         variant: "destructive",
       })
     } finally {
@@ -86,40 +100,52 @@ export default function LoginPage() {
     }
   }
 
-  const handleGoogleSignIn = async () => {
-    setIsLoading(true)
+  // const handleGoogleSignIn = async () => {
+  //   setIsLoading(true)
 
-    try {
-      // Simulación de inicio de sesión con Google
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+  //   try {
+  //     // Simulación de inicio de sesión con Google
+  //     await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      toast({
-        title: "Inicio de sesión exitoso",
-        description: "Has iniciado sesión con Google correctamente",
-      })
+  //     toast({
+  //       title: "Inicio de sesión exitoso",
+  //       description: "Has iniciado sesión con Google correctamente",
+  //     })
 
-      router.push("/")
-    } catch (error) {
-      toast({
-        title: "Error al iniciar sesión",
-        description: "Ha ocurrido un error con Google. Por favor, inténtalo de nuevo.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsLoading(false)
-    }
+  //     router.push("/")
+  //   } catch (error) {
+  //     toast({
+  //       title: "Error al iniciar sesión",
+  //       description:
+  //         "Ha ocurrido un error con Google. Por favor, inténtalo de nuevo.",
+  //       variant: "destructive",
+  //     })
+  //   } finally {
+  //     setIsLoading(false)
+  //   }
+  // }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <p>Cargando...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-sm p-8">
-        <h1 className="text-2xl font-bold text-center mb-6 text-black">Iniciar sesión</h1>
-
+        <h1 className="text-2xl font-bold text-center mb-6 text-black">
+          Iniciar sesión
+        </h1>
         <p className="text-sm text-gray-500 mb-6 text-center">
           Los campos marcados con <span className="text-red-500">*</span> son obligatorios
         </p>
 
-        <button
+        {/* <button
           onClick={handleGoogleSignIn}
           disabled={isLoading}
           className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-md py-3 px-4 mb-6 hover:bg-gray-50 transition-colors font-medium"
@@ -148,7 +174,7 @@ export default function LoginPage() {
         <div className="relative flex items-center justify-center mb-6">
           <div className="border-t border-gray-300 absolute w-full"></div>
           <span className="bg-white px-2 text-sm text-gray-500 relative">O</span>
-        </div>
+        </div> */}
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -200,7 +226,9 @@ export default function LoginPage() {
               <Checkbox
                 id="rememberMe"
                 checked={formData.rememberMe}
-                onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, rememberMe: checked === true }))}
+                onCheckedChange={(checked) =>
+                  setFormData((prev) => ({ ...prev, rememberMe: checked === true }))
+                }
               />
             </div>
             <div className="ml-3 text-sm">
@@ -225,4 +253,3 @@ export default function LoginPage() {
     </div>
   )
 }
-

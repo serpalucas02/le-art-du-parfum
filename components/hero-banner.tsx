@@ -5,11 +5,11 @@ export default function HeroBanner() {
   return (
     <div className="relative w-full h-[500px] bg-black overflow-hidden">
       <div
-        className="absolute inset-0 bg-[url('/placeholder.svg?height=1000&width=2000')] bg-cover bg-center opacity-70"
-        style={{ backgroundImage: "linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4))" }}
+        className="absolute inset-0 bg-[url('/banner.webp')] bg-cover bg-center opacity-70"
+        // style={{ backgroundImage: "linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4))" }}
       />
 
-      <div className="relative h-full container mx-auto px-4 flex flex-col justify-center">
+      {/* <div className="relative h-full container mx-auto px-4 flex flex-col justify-center">
         <div className="max-w-xl">
           <h1 className="text-6xl font-bold text-white mb-2">
             <span className="text-amber-500">2025</span>
@@ -47,7 +47,7 @@ export default function HeroBanner() {
             </Button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

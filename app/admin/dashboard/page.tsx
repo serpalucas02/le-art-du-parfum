@@ -244,12 +244,12 @@ export default function AdminDashboardPage() {
                   >
                     Precio
                   </th>
-                  <th
+                  {/* <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     Precio Efectivo
-                  </th>
+                  </th> */}
                   <th
                     scope="col"
                     className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -291,9 +291,9 @@ export default function AdminDashboardPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         ${product.price.toLocaleString()}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         ${product.effectivePrice?.toLocaleString() || "-"}
-                      </td>
+                      </td> */}
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex justify-end gap-2">
                           <Link href={`/admin/products/edit/${product._id}`}>

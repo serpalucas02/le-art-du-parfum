@@ -12,10 +12,10 @@ interface ProductCardProps {
   name: string
   brand: string
   price: number
-  effectivePrice?: number
+  // effectivePrice?: number
   // installments?: number
   // installmentPrice?: number
-  discount?: number
+  // discount?: number
   imageUrl: string
   // location?: string
 }
@@ -25,17 +25,17 @@ export default function ProductCard({
   name,
   brand,
   price,
-  effectivePrice,
+  // effectivePrice,
   // installments,
   // installmentPrice,
-  discount,
+  // discount,
   imageUrl,
   // location = "showroom",
 }: ProductCardProps) {
   const { addItem } = useCart()
 
   // Calcular effectivePrice si no se proporciona
-  const calculatedEffectivePrice = effectivePrice ?? Math.round(price * 0.7) // 30% de descuento por defecto
+  // const calculatedEffectivePrice = effectivePrice ?? Math.round(price * 0.7) // 30% de descuento por defecto
 
   const handleAddToCart = () => {
     addItem({
@@ -43,7 +43,7 @@ export default function ProductCard({
       name,
       brand,
       price,
-      effectivePrice: calculatedEffectivePrice,
+      // effectivePrice: calculatedEffectivePrice,
       imageUrl,
     })
 
@@ -55,7 +55,7 @@ export default function ProductCard({
 
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-      <Link href={`/producto/${id}`} className="block relative">
+      <Link href={`/product/${id}`} className="block relative">
         <div className="aspect-square overflow-hidden">
           <Image
             src={imageUrl || "/placeholder.svg"}
@@ -65,20 +65,20 @@ export default function ProductCard({
             className="w-full h-full object-contain p-4"
           />
         </div>
-        {discount && (
+        {/* {discount && (
           <div className="absolute top-2 right-2 bg-black text-white text-xs font-bold px-2 py-1 rounded">
             {discount}% OFF
           </div>
-        )}
+        )} */}
       </Link>
 
       <div className="p-4">
-        <Link href={`/producto/${id}`} className="block">
+        <Link href={`/product/${id}`} className="block">
           <h3 className="font-medium text-center mb-4 h-12 line-clamp-2 text-black">{name}</h3>
 
           <div className="text-center mb-2">
             <p className="text-xl font-bold text-black">${price.toLocaleString()}</p>
-            <p className="text-sm text-gray-700">${calculatedEffectivePrice.toLocaleString()} en Efectivo</p>
+            {/* <p className="text-sm text-gray-700">${calculatedEffectivePrice.toLocaleString()} en Efectivo</p> */}
             {/* {location && <p className="text-xs text-gray-500">(Disponible en {location})</p>} */}
           </div>
 
